@@ -16,8 +16,7 @@ class ResultsViewController: UIViewController{
     var playerChoice: String?
     var opponentChoice: String?
     var finalResult: String?
-    var history = [MatchResult]()
-    
+    var history = [MatchResult]()    
     override func viewDidAppear(animated: Bool) {
         if(playerChoice == "rock"){
             if(opponentChoice == "rock"){
@@ -31,7 +30,7 @@ class ResultsViewController: UIViewController{
                 finalResult = "Loss"
             }
             else if(opponentChoice == "scissors"){
-                self.resultsImage.image = UIImage(named: "RockCrushesScissors")
+                self.resultsImage.image = UIImage(named: "RockCrußshesScissors")
                 resultsLabel.text = "Rock crushes Scissors. You win."
                 finalResult = "Win"
             }
@@ -72,10 +71,7 @@ class ResultsViewController: UIViewController{
                 finalResult = "Tie"
             }
         }
-        
-        let match = MatchResult(player: playerChoice, opponent: opponentChoice, results: finalResult)
-        
-        history.append(match)
+
         
         
     }

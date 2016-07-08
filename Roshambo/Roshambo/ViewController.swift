@@ -19,15 +19,21 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
+    var history = [MatchResult]()
     
     // Code only
     @IBAction func rockPressed(){
         var controller:ResultsViewController
+        
         controller = self.storyboard?.instantiateViewControllerWithIdentifier("ResultsViewController") as! ResultsViewController
+        var opp = randomChoice()
         
         controller.playerChoice = "rock"
-        controller.opponentChoice = randomChoice()
+        controller.opponentChoice = opp
+        
+        let match = MatchResult(player: "rock", opponent: opp)
+        
+        history.append(match)
         
         self.presentViewController(controller, animated: true, completion: nil)
     }
@@ -38,17 +44,28 @@ class ViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+        
+        var opp = randomChoice()
+        
         if(segue.identifier == "paper"){
             let controller = segue.destinationViewController as! ResultsViewController
             
             controller.playerChoice = "paper"
-            controller.opponentChoice = randomChoice()
-        }
+            controller.opponentChoice = opp
+            
+            let match = MatchResult(player: "paper", opponent: opp)
+            
+            history.append(match)        }
         else if(segue.identifier == "scissors"){
             let controller = segue.destinationViewController as! ResultsViewController
             
             controller.playerChoice = "scissors"
-            controller.opponentChoice = randomChoice()
+            controller.opponentChoice = opp
+            
+            let match = MatchResult(player: "scissors", opponent: opp)
+            
+            history.append(match)
+            
         }
         
         
@@ -57,7 +74,7 @@ class ViewController: UIViewController {
     @IBAction func historyButtonPressed(){
         var controller:HistoryViewController
         controller = self.storyboard?.instantiateViewControllerWithIdentifier("HistoryViewController") as! HistoryViewController
-        
+        controller.gameHistory = self.history
         self.presentViewController(controller, animated: true, completion: nil)
     
     }

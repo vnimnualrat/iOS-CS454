@@ -12,12 +12,7 @@ struct MatchResult {
     
     var player: String!
     var opponent: String!
-    var results: String!
-    /*
-    init(player: String, opponent: String, results: String){
-        self.player = player
-        self.opponent = opponent
-        self.results = results
-    }*/
+
+
 }
     

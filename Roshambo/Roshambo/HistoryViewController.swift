@@ -16,13 +16,15 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
    
     var gameHistory = [MatchResult]()
-    var items: [String] = ["We", "Hi", "Rawr"]
+    
+    override func viewDidLoad(){
+    super.viewDidLoad()
+    }
     
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        //return gameHistory.count
-        return self.items.count
+        return gameHistory.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -31,18 +33,34 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let cell = self.tableView.dequeueReusableCellWithIdentifier(CellID, forIndexPath: indexPath)
         
-        //let match = self.gameHistory[indexPath.row]
+        let match = self.gameHistory[indexPath.row]
         
-        //cell.textLabel!.text = "work"//returnWinHistory(match)
-        //cell.detailTextLabel!.text = "wtf"//"\(match.player) vs. \(match.opponent)"
-        cell.textLabel?.text = self.items[indexPath.row]
-        
+        cell.textLabel!.text = returnWinHistory(match)
+        cell.detailTextLabel!.text = "\(match.player) vs. \(match.opponent)"
+
         return cell
     }
     
     func returnWinHistory(result: MatchResult) -> String {
-        return result.results
+        var condition: String!
+        if(result.player == result.opponent){
+            condition = "Tie"
+        } else if(result.player == "rock" && result.opponent == "paper"){
+            condition = "Loss"
+        } else if(result.player == "rock" && result.opponent == "scissors"){
+            condition = "Win"
+        } else if (result.player == "paper" && result.opponent == "rock"){
+            condition = "Loss"
+        } else if (result.player == "paper" && result.opponent == "scissors"){
+            condition = "Win"
+        } else if (result.player == "scissors" && result.opponent == "rock"){
+            condition = "Loss"
+        } else if (result.player == "scissors" && result.opponent == "paper"){
+            condition = "Win"
+        }
+        return condition
+        
     }
-
-
 }
+
+
