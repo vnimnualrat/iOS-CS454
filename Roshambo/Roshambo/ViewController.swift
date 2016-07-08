@@ -19,6 +19,8 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
+    
     // Code only
     @IBAction func rockPressed(){
         var controller:ResultsViewController
@@ -46,8 +48,18 @@ class ViewController: UIViewController {
             let controller = segue.destinationViewController as! ResultsViewController
             
             controller.playerChoice = "scissors"
-            controller.opponentChoice = randomChoice()        }
+            controller.opponentChoice = randomChoice()
+        }
         
+        
+    }
+    
+    @IBAction func historyButtonPressed(){
+        var controller:HistoryViewController
+        controller = self.storyboard?.instantiateViewControllerWithIdentifier("HistoryViewController") as! HistoryViewController
+        
+        self.presentViewController(controller, animated: true, completion: nil)
+    
     }
     
 
