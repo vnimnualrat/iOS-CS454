@@ -10,20 +10,30 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UITextFieldDelegate {
+    
     struct Memes {
+        
         var topText: String
+        
         var botText: String
-        var originalImage: UIImage
+        
+        var image: UIImage
+        
         var memedImage: UIImage
+        
     }
 
     @IBOutlet weak var ImagePickerView: UIImageView!
-    @IBOutlet weak var cameraButton: UIToolbar!
+    
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
     
     @IBOutlet weak var topLabel: UITextField!
 
     @IBOutlet weak var bottomLabel: UITextField!
     
+    @IBOutlet weak var toolBar: UIToolbar!
+    
+    @IBOutlet weak var shareButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +46,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         
         self.topLabel.defaultTextAttributes = memeTextAttributes
         self.bottomLabel.defaultTextAttributes = memeTextAttributes
+
         
     }
     
@@ -43,6 +54,11 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         // Subscribe to keyboard notifications to allow the view to raise when necessary
         super.viewWillAppear(animated)
         self.subscribeToKeyboardNotifications()
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        if(ImagePickerView.image == nil){
+            shareButton.enabled = false
+        }
+        
     }
     
     // Unsubscribe
@@ -70,6 +86,8 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         presentViewController(imagePicker, animated: true, completion: nil)
+        
+        shareButton.enabled = true
     }
     
     @IBAction func pickAnImageFromAlbum (sender: AnyObject) {
@@ -77,6 +95,8 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         presentViewController(imagePicker, animated: true, completion: nil)
+        
+        shareButton.enabled = true
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
@@ -110,7 +130,53 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    func save() {
+        //Create the meme
+        let meme = Memes( topText: topLabel.text!, botText: bottomLabel.text!, image:
+            ImagePickerView.image!, memedImage: generateMemedImage())
+    }
+    
+    func generateMemedImage() -> UIImage {
         
+        toolBar.hidden = true
+        shareButton.hidden = true
+
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawViewHierarchyInRect(self.view.frame,
+                                     afterScreenUpdates: true)
+        let memedImage : UIImage =
+            UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // TODO:  Show toolbar and navbar       
+        toolBar.hidden = false
+        shareButton.hidden = false
+        
+        return memedImage
+    }
+    
+    
+    @IBAction func shareAction(sender: AnyObject) {
+        let memeimage = generateMemedImage()
+        let controller = UIActivityViewController(activityItems: [memeimage], applicationActivities: nil)
+        
+        controller.completionWithItemsHandler = {(activityType, completed: Bool, returnItems:[AnyObject]?, error: NSError?) in
+            
+            if(!completed){
+                return
+            }
+            
+            self.save()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        self.presentViewController(controller, animated: true, completion: nil)
+        
+        }
+    
+    
+    
     func textFieldDidBeginEditing(textField: UITextField){
         textField.text = ""
     }
@@ -120,4 +186,6 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         return true
     }
 }
+
+
 
