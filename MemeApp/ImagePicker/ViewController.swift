@@ -10,7 +10,12 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UITextFieldDelegate {
-    
+    struct Memes {
+        var topText: String
+        var botText: String
+        var originalImage: UIImage
+        var memedImage: UIImage
+    }
 
     @IBOutlet weak var ImagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIToolbar!
