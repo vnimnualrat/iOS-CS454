@@ -61,6 +61,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         return condition
         
     }
+    @IBAction func returnView(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 
 
