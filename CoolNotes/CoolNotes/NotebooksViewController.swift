@@ -1,14 +1,15 @@
 //
-//  NotebooksTableViewController.swift
+//  NotebooksViewController.swift
 //  CoolNotes
 //
 //  Created by Nimnualrat, Varunya on 7/15/16.
 //  Copyright © 2016 Nimnualrat, Varunya. All rights reserved.
 //
+
 import UIKit
 import CoreData
 
-class NotebooksTableViewController: CoreDataTableViewController {
+class NotebooksViewController: CoreDataTableViewController {
     
     
     

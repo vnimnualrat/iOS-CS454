@@ -21,8 +21,8 @@
 		6AE7E3851D39606A009A6413 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7E3811D39606A009A6413 /* Note+CoreDataProperties.swift */; };
 		6AE7E3861D39606A009A6413 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7E3821D39606A009A6413 /* Note.swift */; };
 		6AE7E3891D396475009A6413 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7E3881D396475009A6413 /* CoreDataTableViewController.swift */; };
-		6AE7E38B1D3966A4009A6413 /* NotebooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7E38A1D3966A4009A6413 /* NotebooksTableViewController.swift */; };
 		6AE7E3901D396ED4009A6413 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7E38F1D396ED4009A6413 /* NotesViewController.swift */; };
+		6AE7E3921D399C6F009A6413 /* NotebooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7E3911D399C6F009A6413 /* NotebooksViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,8 +63,8 @@
 		6AE7E3811D39606A009A6413 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6AE7E3821D39606A009A6413 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		6AE7E3881D396475009A6413 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
-		6AE7E38A1D3966A4009A6413 /* NotebooksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotebooksTableViewController.swift; sourceTree = "<group>"; };
 		6AE7E38F1D396ED4009A6413 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		6AE7E3911D399C6F009A6413 /* NotebooksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotebooksViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,8 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				6AE7E3881D396475009A6413 /* CoreDataTableViewController.swift */,
-				6AE7E38A1D3966A4009A6413 /* NotebooksTableViewController.swift */,
 				6AE7E38F1D396ED4009A6413 /* NotesViewController.swift */,
+				6AE7E3911D399C6F009A6413 /* NotebooksViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -304,9 +304,9 @@
 				6AE7E3901D396ED4009A6413 /* NotesViewController.swift in Sources */,
 				6AC3E42F1D37E8D200B811BE /* ViewController.swift in Sources */,
 				6AE7E3861D39606A009A6413 /* Note.swift in Sources */,
-				6AE7E38B1D3966A4009A6413 /* NotebooksTableViewController.swift in Sources */,
 				6AE7E3841D39606A009A6413 /* Notebook.swift in Sources */,
 				6AC3E42D1D37E8D200B811BE /* AppDelegate.swift in Sources */,
+				6AE7E3921D399C6F009A6413 /* NotebooksViewController.swift in Sources */,
 				6AC3E45C1D37EA3C00B811BE /* Model.xcdatamodeld in Sources */,
 				6AC3E45F1D37F8D300B811BE /* CoreDataStack.swift in Sources */,
 				6AE7E3891D396475009A6413 /* CoreDataTableViewController.swift in Sources */,

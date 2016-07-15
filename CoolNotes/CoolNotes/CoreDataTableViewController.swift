@@ -94,7 +94,6 @@ extension CoreDataTableViewController{
         }
     }
     
-    
 }
 
 // MARK:  - Fetches
@@ -149,22 +148,23 @@ extension CoreDataTableViewController: NSFetchedResultsControllerDelegate{
                                                 forChangeType type: NSFetchedResultsChangeType,
                                                               newIndexPath: NSIndexPath?) {
         
-        
-        
+        guard let newIndexPath = newIndexPath else{
+            fatalError("No indexPath received")
+        }
         switch(type){
             
         case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
             
         case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.deleteRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
             
         case .Update:
-            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.reloadRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
             
         case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            tableView.deleteRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
         }
         
     }
