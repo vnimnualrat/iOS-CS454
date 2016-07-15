@@ -12,10 +12,10 @@
 import Foundation
 import CoreData
 
-extension NoteBook {
+extension Notebook {
 
     @NSManaged var creationDate: NSDate?
     @NSManaged var name: String?
-    @NSManaged var notes: Note?
+    @NSManaged var notes: NSSet?
 
 }
