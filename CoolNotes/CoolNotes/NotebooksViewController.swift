@@ -64,6 +64,8 @@ class NotebooksViewController: CoreDataTableViewController {
         // Find the right notebook for this indexpath
         let nb = fetchedResultsController!.objectAtIndexPath(indexPath) as! Notebook
         
+        
+        
         // Create the cell
         let cell = tableView.dequeueReusableCellWithIdentifier("NotebookCell", forIndexPath: indexPath)
         
@@ -76,6 +78,17 @@ class NotebooksViewController: CoreDataTableViewController {
         
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if let context = fetchedResultsController?.managedObjectContext,
+            noteBook = fetchedResultsController?.objectAtIndexPath(indexPath) as? Notebook
+            where editingStyle == .Delete{
+            
+            context.deleteObject(noteBook)
+            
+        }
+        
+    }
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -97,7 +110,7 @@ class NotebooksViewController: CoreDataTableViewController {
                 // only interested in those within the current notebook:
                 // NSPredicate to the rescue!
                 let indexPath = tableView.indexPathForSelectedRow!
-                let notebook = fetchedResultsController?.objectAtIndexPath(indexPath)
+                let notebook = fetchedResultsController?.objectAtIndexPath(indexPath) as? Notebook
                 
                 let pred = NSPredicate(format: "notebook = %@", argumentArray: [notebook!])
                 
@@ -106,11 +119,14 @@ class NotebooksViewController: CoreDataTableViewController {
                 // Create FetchedResultsController
                 let fc = NSFetchedResultsController(fetchRequest: fr,
                                                     managedObjectContext:fetchedResultsController!.managedObjectContext,
-                                                    sectionNameKeyPath: nil,
+                                                    sectionNameKeyPath: "humanReadableAge",
                                                     cacheName: nil)
                 
                 // Inject it into the notesVC
                 notesVC.fetchedResultsController = fc
+                
+                // Inject the notebook too!
+                notesVC.notebook = notebook
                 
             }
         }
@@ -118,5 +134,3 @@ class NotebooksViewController: CoreDataTableViewController {
     
     
 }
-
-

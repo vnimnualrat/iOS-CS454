@@ -10,6 +10,8 @@ import UIKit
 
 class NotesViewController: CoreDataTableViewController {
     
+    var notebook : Notebook?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,14 +39,54 @@ class NotesViewController: CoreDataTableViewController {
         return cell
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func tableView(tableView: UITableView,
+                            commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+                                               forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        if let context = fetchedResultsController?.managedObjectContext,
+            note = fetchedResultsController?.objectAtIndexPath(indexPath) as? Note
+            where editingStyle == .Delete{
+            
+            context.deleteObject(note)
+            
+        }
+    }
     
+    
+    
+    @IBAction func addNewNote(sender: AnyObject) {
+        
+        if let nb = notebook, context = fetchedResultsController?.managedObjectContext{
+            
+            // Just create a new note and you're done!
+            let note = Note(text: "New Note", context: context)
+            note.notebook = nb
+            
+        }
+        
+        
+    }
+    
+    
+    // MARK:  - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "displayNote" {
+            
+            
+            // Get the note
+            // Get the detailVC
+            
+            if let ip = tableView.indexPathForSelectedRow,
+                note = fetchedResultsController?.objectAtIndexPath(ip) as? Note,
+                vc = segue.destinationViewController as? NoteViewController{
+                
+                // Inject the note in the the detailVC
+                vc.model = note
+                
+            }
+            
+        }
+    }
 }
